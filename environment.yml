@@ -1,4 +1,4 @@
-name: minimal-ds
+name: assignment2
 channels:
   - conda-forge
   - defaults
