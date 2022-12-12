@@ -27,7 +27,7 @@ class Friedman:
         Returns:
             Returns dataframe with ranks.
         """
-        return frame.rank(axis=1, method="max", ascending=False)
+        return frame.rank(axis=1, method="max", ascending=False).astype(np.int8)
     
     def _cat(self, frame: pd.DataFrame, ranks: pd.DataFrame) -> pd.DataFrame:
         """
@@ -52,14 +52,14 @@ class Friedman:
             Returns friedman table.
         """
         if len(self._treatments.keys()) < 3:
-            raise ValueError("can only compute nemeyi for 3 dependant samples or more")
+            raise ValueError("can only compute nemenyi for 3 dependant samples or more")
             
         # create data frame
         frame = self._create_table()
 
         # calculate average and std for given metric
-        frame.loc["Average", :] = frame.mean()
-        frame.loc["Std", :] = frame.std()
+        avg_metric = frame.mean() #frame.loc["Average", :]
+        std_metric = frame.std() #frame.loc["Std", :] 
         
         # create a ranking table
         ranks = self._rank(frame)
@@ -67,7 +67,9 @@ class Friedman:
         avg = ranks.loc[~ranks.index.isin(["Average", "Std"])].mean() 
         # concatenate rank and metric table
         friedman_table = self._cat(frame, ranks)
-        # get average rank
+        # get average rank, metric and std
+        friedman_table.loc["Average", :]= avg_metric
+        friedman_table.loc["Std", :] = std_metric
         friedman_table.loc["Average rank"] = avg
 
         return friedman_table
@@ -84,7 +86,7 @@ class Friedman:
         N: int = self._blocks
 
         if k < 3:
-            raise ValueError("can only compute nemeyi for 3 dependant samples or more")
+            raise ValueError("can only compute nemenyi for 3 dependant samples or more")
 
         q_alpha = [
             1.960, 2.343, 2.569, 
