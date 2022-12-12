@@ -51,7 +51,6 @@ class Friedman:
         Returns:
             Returns friedman table.
         """
-        
         if len(self._treatments.keys()) < 3:
             raise ValueError("can only compute nemeyi for 3 dependant samples or more")
             
