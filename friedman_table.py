@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from itertools import permutations
 
 class Friedman:
     def __init__(self, blocks: int, treatments: dict[str, list]) -> None:
@@ -90,11 +91,12 @@ class Friedman:
 
         return q_alpha[k - 1] * np.sqrt((k * (k + 1)) / (6 * N))
 
-    def nemenyi_test(self) -> str:
-        x1 = self._friedman_table.loc["Average rank", "Support Vector Machine"] - self._friedman_table.loc["Average rank", "AdaBoost"]
-        x2 = self._friedman_table.get_frame.loc["Average rank", "Support Vector Machine"] - self._friedman_table.get_frame.loc["Average rank", "Random Forest"]
-        x3 = self._friedman_table.get_frame.loc["Average rank", "AdaBoost"] - self._friedman_table.get_frame.loc["Average rank", "Random Forest"]
-        return any([x1, x2, x3] > self.critical_difference())
+    def nemenyi(self, series: pd.Series) -> np.array:
+        perm = permutations(series, 2) #time.get_table.loc["Average rank"].to_list()
+        perm = [sorted(item) for item in perm]
+        perm = list(set(map(tuple, perm)))
+        
+        return np.diff(perm)
         
     @property
     def get_table(self) -> pd.DataFrame:
@@ -108,5 +110,4 @@ class Friedman:
     def get_ranks(self) -> pd.DataFrame:
         return self._ranks
 
-  
   
