@@ -63,10 +63,6 @@ class Friedman:
         self._friedman_table.loc["Std", :] = std_metric
         self._friedman_table.loc["Average rank", :] = avg
 
-    @property
-    def get_frame(self) -> pd.DataFrame:
-        return self._friedman_table
-
     def friedman_statistic(self) -> float:
         n = self._blocks
         k = len(self._treatments.keys())
@@ -74,9 +70,7 @@ class Friedman:
         n2 = n * sum((self._friedman_table.loc["Average rank", :] - n1)**2)
         n3 = sum(((self._ranks - n1)**2).values).sum() / (n * (k - 1))
         return n2 / n3   
-    
-    def test(self) -> str:
-        return "Null hypothesis rejected" if self.friedman_statistic() > 7.8 else "Null hypothesis not rejected"
+
 
     def critical_difference(self) -> float:
         """
@@ -100,14 +94,19 @@ class Friedman:
         x1 = self._friedman_table.loc["Average rank", "Support Vector Machine"] - self._friedman_table.loc["Average rank", "AdaBoost"]
         x2 = self._friedman_table.get_frame.loc["Average rank", "Support Vector Machine"] - self._friedman_table.get_frame.loc["Average rank", "Random Forest"]
         x3 = self._friedman_table.get_frame.loc["Average rank", "AdaBoost"] - self._friedman_table.get_frame.loc["Average rank", "Random Forest"]
-        #perm = permutations(
-            [self._friedman_table.loc["Average rank", "Support Vector Machine"],
-             self._friedman_table.get_frame.loc["Average rank", "AdaBoost"],
-             self._friedman_table.get_frame.loc["Average rank", "Random Forest"]])
-        #sub = map(permuations, )
         return any([x1, x2, x3] > self.critical_difference())
-    
-            
         
+    @property
+    def get_table(self) -> pd.DataFrame:
+        return self._friedman_table
+    
+    @property
+    def get_data(self) -> pd.DataFrame:
+        return self._frame
+    
+    @property
+    def get_ranks(self) -> pd.DataFrame:
+        return self._ranks
+
   
   
