@@ -91,12 +91,15 @@ class Friedman:
 
         return q_alpha[k - 1] * np.sqrt((k * (k + 1)) / (6 * N))
 
-    def nemenyi(self, series: pd.Series) -> np.array:
-        perm = permutations(series, 2) #time.get_table.loc["Average rank"].to_list()
+    def nemenyi(self) -> pd.Series:
+        average_row = self._friedman_table.loc["Average rank"]
+        perm = permutations(average_row, 2)
         perm = [sorted(item) for item in perm]
         perm = list(set(map(tuple, perm)))
+        diff = np.diff(perm)
+        index = np.where(np.any(diff > self.critical_difference(), axis=1))[0][0]
         
-        return np.diff(perm)
+        return average_row.isin(perm[index])
         
     @property
     def get_table(self) -> pd.DataFrame:
