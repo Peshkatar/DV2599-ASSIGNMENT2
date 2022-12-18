@@ -11,13 +11,14 @@ The Friedman test is a non-parametric statistical test (does not assume data fol
 The friedman test is a rank-based test, meaning it ranks the treatments being compared and the computes a test statistic based on the ranks. If the test statistic
 passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level [5%]), then the null hypothesis that there are no significant differences between the treatments is rejected. In our study we have 3 treatment groups with the following three performance metrics: f-measure (description.), accuracy (the percentage of predictions that are true), computatioal time (time taken to train algorithm)
 
-k = number of treatments (algorithms)
+**The Friedman test** [6] <br>
+k = number of treatments (algorithms) <br>
 n = number of samples (blocks)
 
- (1.1) Mean rank: $ \bar{R} = \frac{1}{nk}R_{ij} = \frac{k + 1}{2}; $ <br>
- (1.2) Sum of squared differences: $ n \sum_j (R_j - \bar{R})^2; $ <br>
- (1.3) Sum of squared differences: $ \frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2; $ <br>
- (1.4) Friedman score - ratio between 1.2 & 1.3: $ \frac{n \sum_j (R_j - \bar{R})^2}{\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2}. $ <br>
+ **(1.1)** Mean rank: $ \bar{R} = \frac{1}{nk}R_{ij} = \frac{k + 1}{2}; $ <br>
+ **(1.2)** Sum of squared differences: $ n \sum_j (R_j - \bar{R})^2; $ <br>
+ **(1.3)** Sum of squared differences: $ \frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2; $ <br>
+ **(1.4)** Friedman score - ratio between 1.2 & 1.3: $ \frac{n \sum_j (R_j - \bar{R})^2}{\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2}. $ <br>
 
 The nemenyi test is a post hoc statistical test that is conducted after completition of a study (post hoc) in order to compare treatments in a group. The nemenyi test allows us to
 identify which treatments are significantly (observed diff due to chance is low) different from each other. With the nemenyi test we compare the rank means
@@ -25,8 +26,9 @@ of each treatment to identify which pairs of treatments that display a significa
 between treatments is significant or not by seeing if the difference between means is greater than the critical difference (threshold value, taking into account alpha)
 The test will conclude that the treatments are significantly different if they pass this threshold.
 
-(2.1) Critical difference: $ CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} $ <br>
-(2.2) $ \sum_{ij} | \bar{R_i} - \bar{R_j} | > CD $ [5]
+**The Nemenyi test** <br>
+**(2.1)** Critical difference: $ CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} $ [6] <br>
+**(2.2)** $ \sum_{ij} | \bar{R_i} - \bar{R_j} | > CD $ [5]
 
 ### **D. Algorithms**
 This study has choosen the following 3 classification models to compare: <br>
@@ -55,3 +57,4 @@ Computational time: time taken for model/algo to train.
 3. https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html
 4. https://outerbounds.com/docs/what-is-cross-val/
 5. https://www.real-statistics.com/one-way-analysis-of-variance-anova/kruskal-wallis-test/nemenyi-test-after-kw/
+6. boken
