@@ -1,12 +1,21 @@
-import numpy as np
-import pandas as pd
+"""
+.
+"""
 from itertools import permutations
 
+import numpy as np
+import pandas as pd
+
+
 class Friedman:
+    """
+    .
+    """
     def __init__(self, blocks: int, treatments: dict[str, list]) -> None:
         self._blocks = blocks
         self._treatments = treatments
-        self._frame = pd.DataFrame(self._treatments, index=list(range(1, self._blocks + 1)))
+        self._frame = pd.DataFrame(
+            self._treatments, index=list(range(1, self._blocks + 1)))
 
     def _rank(self, asc: bool) -> pd.DataFrame:
         """
@@ -34,7 +43,6 @@ class Friedman:
         Returns:
             Returns concatenated dataframe.
         """
-        # join kanske?
         return self._frame.apply(
             lambda x: x.astype(str).str.cat(
                 "(" + ranks[x.name].astype(str) + ")", sep=" "
@@ -47,16 +55,18 @@ class Friedman:
             Creates a friedman table according to the main literature (12.8).
         """
         if len(self._treatments.keys()) < 3:
-            raise ValueError("can only compute friedman test for 3 dependant samples or more")   
+            raise ValueError(
+                "can only compute friedman test for 3 dependant samples or more")
 
         # calculate average and std for given metric
         avg_metric = self._frame.mean()
         std_metric = self._frame.std()
-        
+
         # create a ranking table
         self._ranks = self._rank(asc)
         # get averages for each algorithm
-        avg = self._ranks.loc[~self._ranks.index.isin(["Average", "Std"]), :].mean()
+        avg = self._ranks.loc[~self._ranks.index.isin(
+            ["Average", "Std"]), :].mean()
         # concatenate rank and metric table
         self._friedman_table = self._cat(self._ranks)
         # get average rank, metric and std
@@ -70,8 +80,7 @@ class Friedman:
         n1 = (k + 1) / 2
         n2 = n * sum((self._friedman_table.loc["Average rank", :] - n1)**2)
         n3 = sum(((self._ranks - n1)**2).values).sum() / (n * (k - 1))
-        return n2 / n3   
-
+        return n2 / n3
 
     def critical_difference(self) -> float:
         """
@@ -85,32 +94,46 @@ class Friedman:
         N: int = self._blocks
 
         if k < 2:
-            raise ValueError("can only compute nemenyi for 3 dependant samples or more")
+            raise ValueError(
+                "can only compute nemenyi for 3 dependant samples or more")
 
-        q_alpha = [1.960, 2.343, 2.569, 2.728, 2.850, 2.949, 3.031, 3.102, 3.164]
+        q_alpha = [1.960, 2.343, 2.569, 2.728,
+                   2.850, 2.949, 3.031, 3.102, 3.164]
 
         return q_alpha[k - 1] * np.sqrt((k * (k + 1)) / (6 * N))
 
     def nemenyi(self) -> pd.Series:
+        """
+        .
+        """
+
         average_row = self._friedman_table.loc["Average rank"]
         perm = permutations(average_row, 2)
         perm = [sorted(item) for item in perm]
         perm = list(set(map(tuple, perm)))
         diff = np.diff(perm)
-        index = np.where(np.any(diff > self.critical_difference(), axis=1))[0][0]
-        
+        index = np.where(
+            np.any(diff > self.critical_difference(), axis=1))[0][0]
+
         return average_row.isin(perm[index])
-        
+
     @property
     def get_table(self) -> pd.DataFrame:
+        """
+        .
+        """
         return self._friedman_table
-    
+
     @property
     def get_data(self) -> pd.DataFrame:
+        """
+        .
+        """
         return self._frame
-    
+
     @property
     def get_ranks(self) -> pd.DataFrame:
+        """
+        .
+        """
         return self._ranks
-
-  
