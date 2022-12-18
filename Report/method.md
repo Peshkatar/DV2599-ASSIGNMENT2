@@ -20,10 +20,10 @@ between treatments is significant or not by seeing if the difference between mea
 The test will conclude that the treatments are significantly different if they pass this threshold.
 
 ### D. **Algorithms**
-This study has choosen the following 3 classification models to compare:
-Support Vector Machine: an algorithm that .. <br>
-AdaBoost: ... <br>
-Random Forest: ... <br>
+This study has choosen the following 3 classification models to compare: <br>
+Support Vector Machine: an algorithm that **...** <br>
+AdaBoost: **...** <br>
+Random Forest: **...** <br>
 
 ### E. **Code and algorithm implementation**
 The study was performed in a virtual environment on jupyter-lab with python 3.11. Our classifier models came from the sklearn library and the data
@@ -37,9 +37,9 @@ With this technique we get a more robust measure of perfomance by allowing our m
 However this methodology is more computationally expensive [4].
 
 We measure model performance with the following three metrics:
-f-measure: ... <br>
-accuracy: percentage of predictions that are true. <br>
-computational time: time taken for model/algo to train.
+F-measure: **...** <br>
+Accuracy: percentage of predictions that are true. <br>
+Computational time: time taken for model/algo to train.
 
 
 ### **References:**
