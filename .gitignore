@@ -3,7 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Custom
+.vscode
 .DS_Store
+__pycache__
 
 # C extensions
 *.so
