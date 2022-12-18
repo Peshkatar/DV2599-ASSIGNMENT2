@@ -6,12 +6,18 @@ Furthermore, we have 391 duplicate instances.
 Due to support vector machines being very sensitive to outliers(?) [1] we discretized our data set so that we'd get more comparable performance for the later evaluations.
 Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with X bins and Y binning technique.
 
-### **C. Computing the Friedman & Nemenyi [post hoc] test**
+### **C. Computing the Friedman & Nemenyi test**
 The Friedman test is a non-parametric statistical test (does not assume data follows normal distribution) used to determine whether are significant differnces between treatments (algorithms) being compared in a study.
 The friedman test is a rank-based test, meaning it ranks the treatments being compared and the computes a test statistic based on the ranks. If the test statistic
-passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level [5%]), then the null hypothesi
-that there are no significant differences between the treatments is rejected.
-In our study we have 3 treatment groups with the following three performance metrics: f-measure (description.), accuracy (the percentage of predictions that are true), computatioal time (time taken to train algorithm)
+passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level [5%]), then the null hypothesis that there are no significant differences between the treatments is rejected. In our study we have 3 treatment groups with the following three performance metrics: f-measure (description.), accuracy (the percentage of predictions that are true), computatioal time (time taken to train algorithm)
+
+k = number of treatments (algorithms)
+n = number of samples (blocks)
+
+ (1.1) Mean rank: $ \bar{R} = \frac{1}{nk}R_{ij} = \frac{k + 1}{2}; $ <br>
+ (1.2) Sum of squared differences: $ n \sum_j (R_j - \bar{R})^2; $ <br>
+ (1.3) Sum of squared differences: $ \frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2; $ <br>
+ (1.4) Friedman score - ratio between 1.2 & 1.3: $ \frac{n \sum_j (R_j - \bar{R})^2}{\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2}. $ <br>
 
 The nemenyi test is a post hoc statistical test that is conducted after completition of a study (post hoc) in order to compare treatments in a group. The nemenyi test allows us to
 identify which treatments are significantly (observed diff due to chance is low) different from each other. With the nemenyi test we compare the rank means
@@ -19,15 +25,17 @@ of each treatment to identify which pairs of treatments that display a significa
 between treatments is significant or not by seeing if the difference between means is greater than the critical difference (threshold value, taking into account alpha)
 The test will conclude that the treatments are significantly different if they pass this threshold.
 
-### D. **Algorithms**
+(2.1) Critical difference: $ CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} $ <br>
+(2.2) $ \sum_{ij} | \bar{R_i} - \bar{R_j} | > CD $ [5]
+
+### **D. Algorithms**
 This study has choosen the following 3 classification models to compare: <br>
 Support Vector Machine: an algorithm that **...** <br>
 AdaBoost: **...** <br>
 Random Forest: **...** <br>
 
-### E. **Code and algorithm implementation**
-The study was performed in a virtual environment on jupyter-lab with python 3.11. Our classifier models came from the sklearn library and the data
-was processed and read via the pandas package. For more complex filtering and mathmetical operations NumPy was used.
+### **E. Code and algorithm implementation**
+The study was performed in a virtual environment on jupyter-lab with python 3.11. Our classifier models came from the sklearn library and the data was processed and read via the pandas package. For more complex filtering and mathmetical operations NumPy was used.
 
 ### **F. Training and evaluation (cross validation. f-measure, accuracy, computational time)**
 We used stratified k-fold cross validation as our training and testing procedure.The paradigm is as following: We split our data into k folds (10 in our case)
@@ -41,9 +49,9 @@ F-measure: **...** <br>
 Accuracy: percentage of predictions that are true. <br>
 Computational time: time taken for model/algo to train.
 
-
 ### **References:**
 1. https://arxiv.org/abs/1409.0934
 2. Sklearn Discretizater
 3. https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html
 4. https://outerbounds.com/docs/what-is-cross-val/
+5. https://www.real-statistics.com/one-way-analysis-of-variance-anova/kruskal-wallis-test/nemenyi-test-after-kw/
