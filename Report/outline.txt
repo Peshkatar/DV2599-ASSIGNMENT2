@@ -1,0 +1,21 @@
+- Introduction
+  o Problem formulation (comparing algorithms)
+  o Experimentation (statistics introdcution)
+  o Spambase data set
+
+- Method
+  o Preprocessing (data cleaning, distribution, discretization [SVM])
+  o Computing Friedman & Nemenyi
+  o Chosen algorithms
+  o Code and algorithm implementation (object oriented)
+  o Training and evaluation (cross validation. f-measure, accuracy, computation time)
+
+- Results
+  o Data cleaning and transformation results
+  o Critical value, Friedman test, critical difference and nemenyi-score
+  o Model evaluation results (tables. f-measure, accuracy, computation time)
+
+- Conclussion
+  o Usefulness of testing
+
+- References
