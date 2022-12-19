@@ -24,18 +24,18 @@ $accuracy = \frac{TP + TN}{TP + FP + TN + FN}, accuracy \in [0, 1]$ <br>
 k = number of treatments (algorithms) <br>
 n = number of samples (blocks)
 
- **(1.1)** Mean rank: $ \bar{R} = \frac{1}{nk}R_{ij} = \frac{k + 1}{2};$ <br>
- **(1.2)** Sum of squared differences: $ n \sum_j (R_j - \bar{R})^2;$ <br>
- **(1.3)** Sum of squared differences: $ \frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2;$ <br>
- **(1.4)** Friedman score - ratio between 1.2 & 1.3: $ \frac{n \sum_j (R_j - \bar{R})^2}{\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2}.$ <br>
+ **(1.1)** Mean rank: $\bar{R} = \frac{1}{nk}R_{ij} = \frac{k + 1}{2};$ <br>
+ **(1.2)** Sum of squared differences: $n \sum_j (R_j - \bar{R})^2;$ <br>
+ **(1.3)** Sum of squared differences: $\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2;$ <br>
+ **(1.4)** Friedman score - ratio between 1.2 & 1.3: $\frac{n \sum_j (R_j - \bar{R})^2}{\frac{i}{n(k - 1)} \sum_{ij} (R_{ij} - \bar{R})^2}.$ <br>
 
 The nemenyi test is a post hoc statistical test that is conducted after completition of a study (post hoc) in order to compare treatments in a group. The nemenyi test allows us to
 identify which treatments are significantly (observed diff due to chance is low) different from each other. With the nemenyi test we compare the rank means
 of each treatment to identify which pairs of treatments that display a significant difference from each other. We conclude whether the difference between treatments is significant or not by seeing if the difference between means is greater than the critical difference (threshold value, taking into account alpha). The test will conclude that the treatments are significantly different if they pass this threshold.
 
 **Nemenyi test** <br>
-**(2.1)** Critical difference: $ CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} $ [6] <br>
-**(2.2)** $ \sum_{ij} | \bar{R_i} - \bar{R_j} | > CD $ [5]
+**(2.1)** Critical difference: $CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}}$ [6] <br>
+**(2.2)** $\sum_{ij} | \bar{R_i} - \bar{R_j} | > CD$ [5]
 
 ### **D. Algorithms**
 This study has choosen the following 3 classification models to compare: <br>
