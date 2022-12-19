@@ -9,9 +9,18 @@ Discretization was performed with the KBinsDiscretizer method from Sklearn [2] w
 ### **C. Computing the Friedman & Nemenyi test**
 The Friedman test is a non-parametric statistical test (does not assume data follows normal distribution) used to determine whether are significant differnces between treatments (algorithms) being compared in a study.
 The friedman test is a rank-based test, meaning it ranks the treatments being compared and the computes a test statistic based on the ranks. If the test statistic
-passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level [5%]), then the null hypothesis that there are no significant differences between the treatments is rejected. In our study we have 3 treatment groups with the following three performance metrics: f-measure (description.), accuracy (the percentage of predictions that are true), computatioal time (time taken to train algorithm)
+passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level [5%]), then the null hypothesis that there are no significant differences between the treatments is rejected. In our study we have 3 treatment groups with the following three performance metrics: <br>
+**F-measure**: also known as F1 score, is a performance metric used to evaluate a classification model. It is computed as the harmonic mean between precision and recall. F-measure ranges between 0 to 1, with higher values meaning better performance. It is a balanced metric that considers both precision and recall of the model.<br>
+$F1 = 2 * \frac{precision * recall}{precision + recall}, F1 \in [0, 1] $ <br>
+**Precision**: is the fraction of true positive (TP) predictions made by the model among all positive predictions. <br>
+$precision = \frac{TP}{TP+FP}, precision \in [0, 1]$ <br>
+**Recall**: is the fraction of true positive predictions made by the classifier among all actual positive predictions. <br>
+$recall = \frac{TP}{TP+FN}, recall \in [0, 1] $ <br>
+**Accuracy**: the percentage of predictions that are correct. <br>
+$accuracy = \frac{TP + TN}{TP + FP + TN + FN}, accuracy \in [0, 1]$ <br>
+**Computational time**: time taken to train algorithm.
 
-**The Friedman test** [6] <br>
+**Friedman test** [6] <br>
 k = number of treatments (algorithms) <br>
 n = number of samples (blocks)
 
@@ -22,11 +31,9 @@ n = number of samples (blocks)
 
 The nemenyi test is a post hoc statistical test that is conducted after completition of a study (post hoc) in order to compare treatments in a group. The nemenyi test allows us to
 identify which treatments are significantly (observed diff due to chance is low) different from each other. With the nemenyi test we compare the rank means
-of each treatment to identify which pairs of treatments that display a significant difference from each other. We conclude whether the difference
-between treatments is significant or not by seeing if the difference between means is greater than the critical difference (threshold value, taking into account alpha)
-The test will conclude that the treatments are significantly different if they pass this threshold.
+of each treatment to identify which pairs of treatments that display a significant difference from each other. We conclude whether the difference between treatments is significant or not by seeing if the difference between means is greater than the critical difference (threshold value, taking into account alpha). The test will conclude that the treatments are significantly different if they pass this threshold.
 
-**The Nemenyi test** <br>
+**Nemenyi test** <br>
 **(2.1)** Critical difference: $ CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} $ [6] <br>
 **(2.2)** $ \sum_{ij} | \bar{R_i} - \bar{R_j} | > CD $ [5]
 
