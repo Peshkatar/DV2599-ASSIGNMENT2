@@ -78,8 +78,8 @@ class Friedman:
         n = self._blocks
         k = len(self._treatments.keys())
         n1 = (k + 1) / 2
-        n2 = n * sum((self._friedman_table.loc["Average rank", :] - n1)**2)
-        n3 = sum(sum((self._ranks - n1)**2).values) / (n * (k - 1))
+        n2 = n * np.sum((self._friedman_table.loc["Average rank", :] - n1)**2)
+        n3 = np.sum(np.sum(((self._ranks - n1)**2).values)) / (n * (k - 1))
         return n2 / n3
 
     def critical_difference(self) -> float:
