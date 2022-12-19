@@ -9,7 +9,7 @@ import pandas as pd
 
 class Friedman:
     """
-    .
+    Object oriented implementation of the Friedman test and nemenyi test.
     """
     def __init__(self, blocks: int, treatments: dict[str, list]) -> None:
         self._blocks = blocks
@@ -79,13 +79,13 @@ class Friedman:
         k = len(self._treatments.keys())
         n1 = (k + 1) / 2
         n2 = n * sum((self._friedman_table.loc["Average rank", :] - n1)**2)
-        n3 = sum(((self._ranks - n1)**2).values).sum() / (n * (k - 1))
+        n3 = sum(sum((self._ranks - n1)**2).values) / (n * (k - 1))
         return n2 / n3
 
     def critical_difference(self) -> float:
         """
         Description:
-            computes the critial distance of the nemenyi test.
+            Computes the critial distance of the nemenyi test.
 
         Returns:
             returns the critical distance
@@ -104,7 +104,11 @@ class Friedman:
 
     def nemenyi(self) -> pd.Series:
         """
-        .
+        Description:
+            Computes nemenyi test
+
+        Returns:
+            pandas series with the treatments that display significant difference set as True and all others that fail to pass threshold to false.
         """
 
         average_row = self._friedman_table.loc["Average rank"]
@@ -120,20 +124,30 @@ class Friedman:
     @property
     def get_table(self) -> pd.DataFrame:
         """
-        .
+        Description:
+            Returns friedman table (ranks and values)
+
+        Returns:
+            pandas dataframe: Friedman table
         """
         return self._friedman_table
 
     @property
     def get_data(self) -> pd.DataFrame:
         """
-        .
+        Description:
+            Returns performance scores
+        Returns:
+            pandas dataframe: performance score
         """
         return self._frame
 
     @property
     def get_ranks(self) -> pd.DataFrame:
         """
-        .
+        Description:
+            Returns ranks
+        Returns:
+            pandas dataframe: ranks
         """
         return self._ranks
