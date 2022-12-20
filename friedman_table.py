@@ -95,7 +95,7 @@ class Friedman:
 
         if k < 2:
             raise ValueError(
-                "can only compute nemenyi for 3 dependant samples or more")
+                "can only compute nemenyi for 3 samples or more")
 
         q_alpha = [1.960, 2.343, 2.569, 2.728,
                    2.850, 2.949, 3.031, 3.102, 3.164]
