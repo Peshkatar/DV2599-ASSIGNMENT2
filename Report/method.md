@@ -5,7 +5,7 @@ Upon examination we find a right-skewed distribution for all but the target feat
 Due to support vector machines being very sensitive to outliers [1] we discretized our data set so that we'd get more comparable performance results between the algorithms. Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with 7 bins and kmeans binning technique. Note however that the discretized data set was only used for training the SVM classifier. All other classifiers were trained on non-transformed data.
 
 ### **C. Computing the Friedman & Nemenyi test**
-The Friedman test is a non-parametric statistical test (doesn't assume data follows any particular distribution) used to determine whether are significant differences between treatments (algorithms) being compared in a study. The Friedman test is a rank-based test, meaning it ranks the treatments being compared and the computes a test statistic based on the ranks. If the test statistic passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level), then the null hypothesis $H_o$, that there are no significant differences between the treatments is rejected. <br>
+The Friedman test is a non-parametric statistical test (doesn't assume data follows any particular distribution) used to determine whether are significant differences between treatments (algorithms) being compared in a study. The Friedman test is a rank-based test, meaning it ranks the treatments being compared and the computes a test statistic based on the ranks. If the test statistic passes a certain threshold, referred to as the critical value (determined by the number of treatmets being compared and the significance level), then the null hypothesis $H_o$, that there are no significant differences between the treatments is rejected.
 
 - **Friedman test** [3] <br>
 k = number of treatments (algorithms) <br>
@@ -43,7 +43,7 @@ To ensure we get a fair representation of our target with each sample the folds 
 With this technique we get a more robust measure of perfomance by allowing our model to train and test on different parts of the data set.
 However this methodology is more computationally expensive [7].
 
-We measure model performance with the following three metrics: <br>
+We measure model performance with the following three metrics:
 - **F-measure**: also known as F1 score, is a performance metric used to evaluate a classification model. It is computed as the harmonic mean between precision and recall. F-measure ranges between 0 to 1, with higher values meaning better performance. It is a balanced metric that considers both precision and recall of the model.<br>
 $F1 = 2 * \frac{precision * recall}{precision + recall}, F1 \in [0, 1]$ <br>
 - **Precision**: is the fraction of true positive (TP) predictions made by the model among all positive predictions. <br>
