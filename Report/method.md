@@ -3,8 +3,7 @@ Upon examination we find a right-skewed distribution for all but the target feat
 Furthermore, we have 391 duplicate instances.
 
 ### **B. Data Transformation (discretization)**
-Due to support vector machines being very sensitive to outliers(?) [1] we discretized our data set so that we'd get more comparable performance for the later evaluations.
-Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with 7 bins and kmeans binning technique.
+Due to support vector machines being very sensitive to outliers(?) [1] we discretized our data set so that we'd get more comparable performance results between the algorithms. Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with 7 bins and kmeans binning technique.
 
 ### **C. Computing the Friedman & Nemenyi test**
 The Friedman test is a non-parametric statistical test (does not assume data follows normal distribution) used to determine whether are significant differnces between treatments (algorithms) being compared in a study.
@@ -34,9 +33,10 @@ This study has choosen the following 3 classification models to compare: <br>
 Support Vector Machine: an algorithm that **...** <br>
 AdaBoost: **...** <br>
 Random Forest: **...** <br>
+These algorithms show great performance, are very popular [10] and don't require much-to-any hyper parameter tuning. These reasons were the motivation behind our decision.
 
 ### **E. Code and algorithm implementation**
-The study was performed in a virtual environment on jupyter-lab with python 3.11. Our classifier models came from the sklearn library and the data was processed and read via the pandas package. For more complex filtering and mathmetical operations NumPy was used.
+The study was performed in a virtual environment on jupyter-lab with python 3.11. Our classifier models and performance measures came from the sklearn library and the data was processed and read via the pandas package. For more complex filtering and mathmetical operations NumPy and itertools was used and lastly for measuring the training time we borrowed the time method from the standard library time.
 
 ### **F. Training and evaluation (cross validation. f-measure, accuracy, computational time)**
 We used stratified k-fold cross validation as our training and testing procedure.The paradigm is as following: We split our data into k folds (10 in our case)
@@ -63,3 +63,4 @@ $accuracy = \frac{TP + TN}{TP + FP + TN + FN}, accuracy \in [0, 1]$ <br>
 4. https://outerbounds.com/docs/what-is-cross-val/
 5. https://www.real-statistics.com/one-way-analysis-of-variance-anova/kruskal-wallis-test/nemenyi-test-after-kw/
 6. boken
+10. https://www.simplilearn.com/10-algorithms-machine-learning-engineers-need-to-know-article
