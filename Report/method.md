@@ -20,13 +20,16 @@ The Nemenyi test is a post hoc statistical test that is conducted after completi
 
 - **Nemenyi test** <br>
 **(2.1)** Critical difference: $CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}}$ [6] <br>
-**(2.2)** $\sum_{ij} | \bar{R_i} - \bar{R_j} | > CD$. [5]
+**(2.2)** $\sum_i \sum_j | \bar{R_i} - \bar{R_j} | > CD$. [5]
 
 ### **D. Algorithms**
-This study has choosen the following 3 classification models to compare: <br>
-Support Vector Machine: a statistical classifier and general linear model.  <br>
-AdaBoost: **...** <br>
-Random Forest: an ensamble technique which uses a set of decision trees. <br>
+This study has choosen the following 3 classification models to compare:
+
+**Support vector machine:** fits a line with maximal margin seperating instances by their class belonging. Instances exist in geometric space with their coordinates being the features. For scenarios where no straight line/plane can seperate the data points a non-linear function will be applied so that data points will be re-oriented in a higher dimension allowing for a line or plane to seperate the instances.
+
+**AdaBoost:** an ensamble of weaker classifiers are training on samples of the training data. For each iteration the trained model will be tested on the other samples (random) of the training split and for those data points, if any, that have a high error associated with them will be weighted more in the next training iteration so that the model can train on it's weaker areas. In essence a meta-algorithm that wraps over a classifier model.
+
+**Random Forest:** an ensamble technique which uses a set of decision trees and intelligent pruning algorithms for removing splits with low information-yield and a voting system so that the all predictions from the entire set of decision trees are aggregated into a final prediction.
 
 These algorithms show great performance, are very popular [10] and don't require much-to-any hyper parameter tuning. These reasons were the motivation behind our decision.
 
