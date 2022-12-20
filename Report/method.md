@@ -4,7 +4,7 @@ Furthermore, we have 391 duplicate instances.
 
 ### **B. Data Transformation (discretization)**
 Due to support vector machines being very sensitive to outliers(?) [1] we discretized our data set so that we'd get more comparable performance for the later evaluations.
-Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with X bins and Y binning technique.
+Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with 7 bins and kmeans binning technique.
 
 ### **C. Computing the Friedman & Nemenyi test**
 The Friedman test is a non-parametric statistical test (does not assume data follows normal distribution) used to determine whether are significant differnces between treatments (algorithms) being compared in a study.
@@ -27,7 +27,7 @@ of each treatment to identify which pairs of treatments that display a significa
 
 - **Nemenyi test** <br>
 **(2.1)** Critical difference: $CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}}$ [6] <br>
-**(2.2)** $\sum_{ij} | \bar{R_i} - \bar{R_j} | > CD$ [5]
+**(2.2)** $\sum_{ij} | \bar{R_i} - \bar{R_j} | > CD$. [5]
 
 ### **D. Algorithms**
 This study has choosen the following 3 classification models to compare: <br>
