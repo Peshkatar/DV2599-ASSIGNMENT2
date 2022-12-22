@@ -1,5 +1,5 @@
 ### **A. Data Exploration**
-Upon examination we find a right-skewed distribution for all but the target feature. The target column has a 60/40-procent ratio of ham and spam making it a fairly balanced data set. Furthermore, we have 391 duplicate instances.
+Upon examination we find a right-skewed distribution for all but the target feature. The target column has a 60/40-procent ratio of ham and spam making it a fairly balanced data set. Furthermore, we identified 391 duplicate instances.
 
 ### **B. Data Transformation (discretization)**
 Due to support vector machines being very sensitive to outliers [1] we discretized our data set so that we'd get more comparable performance results between the algorithms. Discretization was performed with the KBinsDiscretizer method from Sklearn [2] with 7 bins and kmeans binning technique. Note however that the discretized data set was only used for training the SVM classifier. All other classifiers were trained on non-transformed data.
